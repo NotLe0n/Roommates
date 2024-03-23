@@ -1,0 +1,10 @@
+Configs: {
+	Config: {
+		DisplayName: Config
+
+		requireChairs: {
+			Label: Jeder Mitbewohner benötigt einen Stuhl
+			Tooltip: Verhindert das Einziehen von NPCs, wenn weniger Stühle als Mitbewohner vorhanden sind
+		}
+	}
+}

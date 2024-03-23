@@ -1,0 +1,8 @@
+displayName = Roommates
+author = NotLe0n
+version = 2.0
+hideCode = false
+hideResources = false
+includeSource = false
+buildIgnore = vs/*, *.csproj, *.sln, *.pidb, *.userprefs, *.user, obj/*, bin/*
+homepage = https://discord.gg/NX4DVzz2v6

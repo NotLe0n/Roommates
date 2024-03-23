@@ -1,0 +1,10 @@
+Configs: {
+	Config: {
+		DisplayName: Config
+
+		requireChairs: {
+			Label: Require a chair for each roommate
+			Tooltip: Prevents NPCs from moving in if there are fewer chairs than roommates
+		}
+	}
+}
