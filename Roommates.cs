@@ -37,7 +37,7 @@ public class Roommates : Mod
 		
 		bool roomChair = chairCount > roommateCount;
 		RoomChairField.SetValue(null, roomChair);
-		WorldGen.canSpawn = WorldGen.canSpawn && chairCount >= roommateCount;
+		WorldGen.canSpawn = WorldGen.canSpawn && chairCount >= roommateCount; // different condition to prevent NPCs from switching rooms
 		return ret && roomChair;
 	}
 
