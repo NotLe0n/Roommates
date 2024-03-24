@@ -1,8 +1,8 @@
 displayName = Roommates
 author = NotLe0n
-version = 2.0
+version = 3.0
 hideCode = false
 hideResources = false
 includeSource = false
 buildIgnore = vs/*, *.csproj, *.sln, *.pidb, *.userprefs, *.user, obj/*, bin/*
-homepage = https://discord.gg/NX4DVzz2v6
+homepage = https://github.com/NotLe0n/Roommates

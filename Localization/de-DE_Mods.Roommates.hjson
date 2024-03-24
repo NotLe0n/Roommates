@@ -6,5 +6,10 @@ Configs: {
 			Label: Jeder Mitbewohner benötigt einen Stuhl
 			Tooltip: Verhindert das Einziehen von NPCs, wenn weniger Stühle als Mitbewohner vorhanden sind
 		}
+
+		maxRoommateCount: {
+			Label: Maximale Anzahl an Mitbewohner
+			Tooltip: Setzt die Anzahl an NPCs die zusammen leben dürfen. Null bedeutet, dass es kein Limit gibt.
+		}
 	}
 }

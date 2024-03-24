@@ -1,7 +1,8 @@
 This mod allows multiple NPCs to occupy one room.
 
-There is currently no restriction how many NPCs can live together. You only need to have a valid house.
+Configuration:
 
-The config has a setting to require a chair for each roommate.
+* Require a chair for each roommate, default: off
+* Maximum number of Roommates, default: 0 (no limit)
 
 NPCs can move into occupied houses by themselves.

@@ -6,5 +6,10 @@ Configs: {
 			Label: Require a chair for each roommate
 			Tooltip: Prevents NPCs from moving in if there are fewer chairs than roommates
 		}
+
+		maxRoommateCount: {
+			Label: Maximum number of Roommates
+			Tooltip: Sets the number of NPCs that can live together. Zero means there is no limit.
+		}
 	}
 }

@@ -13,8 +13,8 @@ public class Roommates : Mod
 	public override void Load()
 	{
 		//On_TownRoomManager.CanNPCsLiveWithEachOther_int_NPC += (_, _, _, _) => true; inlined :(
-		On_WorldGen.ScoreRoom_IsThisRoomOccupiedBySomeone += (orig, npc, _) => orig(npc, MagicNumber);
-		On_WorldGen.IsRoomConsideredAlreadyOccupied += (orig, x, y, _) => orig(x, y, MagicNumber);
+		On_WorldGen.ScoreRoom_IsThisRoomOccupiedBySomeone += (orig, npc, npcTypeAsking) => orig(npc, MagicNumber) || OverLimit(npc, npcTypeAsking);
+		On_WorldGen.IsRoomConsideredAlreadyOccupied += (orig, x, y, npcTypeToSpawn) => orig(x, y, MagicNumber) || OverLimit(npcTypeToSpawn:npcTypeToSpawn);
 		On_WorldGen.IsRoomConsideredOccupiedForNPCIndex += (_, _) => true; // true so that canSpawn is set to true. Prevents NPCs from switching rooms
 		On_WorldGen.RoomNeeds += RequireCorrectChairCount;
 	}
@@ -55,18 +55,32 @@ public class Roommates : Mod
 		return numChairs;
 	}
 
-	private static int CountRoommates()
+	private static int CountRoommates(int ignoreNpc = -1)
 	{
 		int numRoommates = 0;
 
 		for (int k = 0; k < Main.maxNPCs; k++) {
 			var n = Main.npc[k];
-			if (!n.active || !n.townNPC || n.homeless || n.housingCategory == HousingCategoryID.PetNPCs) continue;
+			// don't count pets and ignore the npc currently counting, to prevent it from moving out
+			if (!n.active || !n.townNPC || n.homeless || n.housingCategory == HousingCategoryID.PetNPCs || k == ignoreNpc) continue;
+			
 			if (WorldGen.roomX1-1 <= n.homeTileX && WorldGen.roomX2 >= n.homeTileX && WorldGen.roomY1 <= n.homeTileY && WorldGen.roomY2+1 >= n.homeTileY) {
 				numRoommates++;
 			}
 		}
 
 		return numRoommates;
+	}
+
+	private static bool OverLimit(int ignoreNpc = -1, int npcTypeToSpawn = -1)
+	{
+		int max = ModContent.GetInstance<Config>().maxRoommateCount;
+		if (max == 0) return false;
+		// allows pets to live in the house even if the limit is reached
+		if (ContentSamples.NpcsByNetId.TryGetValue(npcTypeToSpawn, out var value) && value.housingCategory == HousingCategoryID.PetNPCs) {
+			return false;
+		}
+
+		return CountRoommates(ignoreNpc) >= max;
 	}
 }
