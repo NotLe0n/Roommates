@@ -1,10 +1,10 @@
 Configs: {
 	Config: {
-		DisplayName: Config
+		DisplayName: Konfiguration
 
 		requireChairs: {
 			Label: Jeder Mitbewohner benötigt einen Stuhl
-			Tooltip: Verhindert das Einziehen von NPCs, wenn weniger Stühle als Mitbewohner vorhanden sind
+			Tooltip: Verhindert das Einziehen von NPCs, wenn weniger Stühle als Mitbewohner vorhanden sind.
 		}
 
 		maxRoommateCount: {

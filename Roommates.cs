@@ -28,6 +28,7 @@ public class Roommates : Mod
 			return ret;
 		}
 
+		// pets don't need chairs
 		if (Main.npc.First(x => x.type == npctype).housingCategory == HousingCategoryID.PetNPCs) {
 			return ret;
 		}
@@ -46,13 +47,8 @@ public class Roommates : Mod
 		int numChairs = 0;
 		for (int i = WorldGen.roomX1; i < WorldGen.roomX2; i++) {
 			for (int j = WorldGen.roomY1; j < WorldGen.roomY2; j++) {
-				for (int k = 0; k < TileID.Sets.RoomNeeds.CountsAsChair.Length; k++)
-				{
-					if (Main.tile[i, j].TileType == TileID.Sets.RoomNeeds.CountsAsChair[k])
-					{
-						numChairs++;
-						break;
-					}
+				if (TileID.Sets.RoomNeeds.CountsAsChair.Contains(Main.tile[i, j].TileType)) {
+					numChairs++;
 				}
 			}
 		}
