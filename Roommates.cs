@@ -46,11 +46,6 @@ public class Roommates : Mod
 		int numChairs = 0;
 		for (int i = WorldGen.roomX1; i < WorldGen.roomX2; i++) {
 			for (int j = WorldGen.roomY1; j < WorldGen.roomY2; j++) {
-				if (Main.tile[i, j].TileType == TileID.Chairs) {
-					numChairs++;
-					continue;
-				}
-
 				for (int k = 0; k < TileID.Sets.RoomNeeds.CountsAsChair.Length; k++)
 				{
 					if (Main.tile[i, j].TileType == TileID.Sets.RoomNeeds.CountsAsChair[k])
