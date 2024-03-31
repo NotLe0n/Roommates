@@ -48,6 +48,16 @@ public class Roommates : Mod
 			for (int j = WorldGen.roomY1; j < WorldGen.roomY2; j++) {
 				if (Main.tile[i, j].TileType == TileID.Chairs) {
 					numChairs++;
+					continue;
+				}
+
+				for (int k = 0; k < TileID.Sets.RoomNeeds.CountsAsChair.Length; k++)
+				{
+					if (Main.tile[i, j].TileType == TileID.Sets.RoomNeeds.CountsAsChair[k])
+					{
+						numChairs++;
+						break;
+					}
 				}
 			}
 		}
