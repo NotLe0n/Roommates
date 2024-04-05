@@ -1,8 +1,10 @@
+using System;
 using System.Linq;
 using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ObjectData;
 
 namespace Roommates;
 public class Roommates : Mod
@@ -44,16 +46,18 @@ public class Roommates : Mod
 
 	private static int CountChairs()
 	{
-		int numChairs = 0;
+		float numChairs = 0;
+
 		for (int i = WorldGen.roomX1; i <= WorldGen.roomX2; i++) {
 			for (int j = WorldGen.roomY1; j <= WorldGen.roomY2; j++) {
 				if (TileID.Sets.RoomNeeds.CountsAsChair.Contains(Main.tile[i, j].TileType)) {
-					numChairs++;
+					var tileData = TileObjectData.GetTileData(Main.tile[i, j]);
+					numChairs += 1f / (tileData.Width * tileData.Height);
 				}
 			}
 		}
-
-		return numChairs;
+		
+		return (int)Math.Round(numChairs);
 	}
 
 	private static int CountRoommates(int ignoreNpc = -1)
