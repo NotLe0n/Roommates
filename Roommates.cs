@@ -23,18 +23,13 @@ public class Roommates : Mod
 
 	private static readonly FieldInfo RoomChairField = typeof(WorldGen).GetField("roomChair", BindingFlags.Static | BindingFlags.NonPublic);
 
-	private static bool RequireCorrectChairCount(On_WorldGen.orig_RoomNeeds orig, int npctype)
+	private static bool RequireCorrectChairCount(On_WorldGen.orig_RoomNeeds orig, int npcType)
 	{
-		bool ret = orig(npctype);
+		bool ret = orig(npcType);
 		if (!ModContent.GetInstance<Config>().requireChairs) {
 			return ret;
 		}
-
-		// pets don't need chairs
-		if (Main.npc.First(x => x.type == npctype).housingCategory == HousingCategoryID.PetNPCs) {
-			return ret;
-		}
-
+		
 		int chairCount = CountChairs();
 		int roommateCount = CountRoommates();
 		
@@ -82,7 +77,7 @@ public class Roommates : Mod
 		int max = ModContent.GetInstance<Config>().maxRoommateCount;
 		if (max == 0) return false;
 		// allows pets to live in the house even if the limit is reached
-		if (ContentSamples.NpcsByNetId.TryGetValue(npcTypeToSpawn, out var value) && value.housingCategory == HousingCategoryID.PetNPCs) {
+		if (NPCID.Sets.IsTownPet[npcTypeToSpawn]) {
 			return false;
 		}
 
